@@ -1,0 +1,13 @@
+db 
+db.createCollection("students")
+show collections
+db.students.insertMany([{name:"Aminta",roll_no:8,age:21,contact_no:9686744132,email_id:"chandana@gmail.com"},{name:"Diksha",roll_no:9,age:21,contact_no:9686274132,email_id:"diksha@gmail.com"},{name:"Steven",roll_no:10,age:21,contact_no:7898744132,email_id:"steven@gmail.com"},{name:"Ross",roll_no:11,age:27,contact_no:9689744932,email_id:"ross@gmail.com"},{name:"Charlie",roll_no:8,age:31,contact_no:8674244132,email_id:"charlier@gmail.com"}])
+db.students.find()
+db.students.findOneAndUpdate({roll_no:10},{$set:{email_id:"harry.cs@gmail.com"}})
+db.students.find()
+db.students.findOneAndReplace({name:"Rachel"},{name:"Monica",roll_no:11,age:27,contact_no:8976744132,email_id:"monicagmail.com"})
+db.students.find()
+mongoexport --db student --collection studentss --csv --fieldFile e:/fields.txt --out e:/output.txt
+db.students.drop()
+mongoimport --db student --collection sampleJSON --type csv --headerline  --file e:/output.txt
+db.students.find()

@@ -1,0 +1,10 @@
+use customer
+db.createCollection("customers")
+db.customers.insertMany([{cust_id:11, acc_bal:1000, acc_type:"Z"},{cust_id:12, acc_bal:2800, acc_type:"Z"},{cust_id:13, acc_bal:3800, acc_type:"Z"},{cust_id:14, acc_bal:4500, acc_type:"Y"}])
+db.customers.find().pretty()
+db.customers.find({acc_type:"Z",acc_bal:{$gt:1200}})
+db.customers.find({cust_id:11,acc_bal:{$min:acc_bal}})
+db.customers.aggregate([{$group: {_id: "$cust_id",min_bal: {$min: "$acc_bal"},max_bal: {$max: "$acc_bal"}}}]);
+mongoexport --db customer --collection customers --csv --fieldFile e:/fields.txt --out e:/output.txt
+db.students.drop()
+mongoimport --db customer --collection sampleJSON --type csv --headerline  --file e:/output.txt
